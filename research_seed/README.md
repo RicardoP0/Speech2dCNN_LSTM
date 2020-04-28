@@ -1,12 +1,11 @@
-## Research Seed Folder   
-Create a folder for each contribution (ie: MNIST, BERT, etc...).   
-Each folder will have:
+## Research Seed Folder
 
-##### contribution_name_trainer.py    
+
+##### cnn_trainer.py    
 Runs your LightningModule. Abstracts training loop, distributed training, etc...   
 
-##### contribution_name.py  
-Holds your main contribution   
+##### cnn_sweep.py    
+Code for hyperparameter finding using wandb's sweep.
 
-## Example  
-The folder here gives an example for mnist.   
+##### cnn_lflb.py and cnn_rnn.py
+Code for cnn and cnn + lstm models  
