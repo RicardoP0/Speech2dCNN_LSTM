@@ -42,4 +42,4 @@ python cnn_trainer.py
 
 Validation accuracy reaches 0.4 and a F1 value of 0.3 using 8 classes.
 ![Validation accuracy on 8 classes](/img/val_acc.png)
-![F1 on 8 classes](/img/f1_acc.png)
+![F1 on 8 classes](/img/val_f1.png)
