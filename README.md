@@ -1,15 +1,4 @@
-### pytorch-lightning-conference-seed
-Use this seed to refactor your PyTorch research code for:  
-- a paper submission  
-- a new research project.     
-
-[Read the usage instructions here](https://github.com/williamFalcon/pytorch-lightning-conference-seed/blob/master/HOWTO.md)
-
-#### Goals  
-The goal of this seed is to structure ML paper-code the same so that work can easily be extended and replicated.   
-
-###### DELETE EVERYTHING ABOVE FOR YOUR PROJECT   
----   
+   
 <div align="center">    
  
 # Speech2dCNN_LSTM    
@@ -35,17 +24,17 @@ cd Speech2dCNN_LSTM
 pip install -e .   
 pip install requirements.txt
  ```   
- Next, navigate to [Your Main Contribution (MNIST here)] and run it.   
+ Next, navigate to [CNN+LSTM](https://github.com/RicardoP0/Speech2dCNN_LSTM/tree/master/research_seed/audio_classification)   and run it.   
  ```bash
 # module folder
-cd research_seed/mnist/   
+cd research_seed/audio_classification/   
 
-# run module (example: mnist as your main contribution)   
-python mnist_trainer.py    
+# run module
+python cnn_trainer.py    
 ```
 
 ## Main Contribution      
-List your modules here. Each module contains all code for a full system including how to run instructions.   
-- [MNIST](https://github.com/williamFalcon/pytorch-lightning-conference-seed/tree/master/research_seed/mnist)  
+ 
+- [CNN+LSTM](https://github.com/RicardoP0/Speech2dCNN_LSTM/tree/master/research_seed/audio_classification)  
 
 
