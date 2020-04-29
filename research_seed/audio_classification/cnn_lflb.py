@@ -65,23 +65,15 @@ class CNN_LFLB(pl.LightningModule):
         self.fc2 = nn.Linear(64, self.num_classes)
 
     def forward(self, x):
-        #print('is cuda', x.is_cuda)
-        # print(x.shape)
         x = self.lflb1(x)
-        # print(x.shape) #torch.Size([32, 64, 109, 109])
         x = self.lflb2(x)
-        # print(x.shape) #torch.Size([32, 64, 26, 26])
-        x = self.lflb3(x)  # torch.Size([32, 128, 6, 6])
-        # print(x.shape)
+        x = self.lflb3(x) 
         x = self.lflb4(x)
-        # print(x.shape)
 
         x = x.view(x.shape[0], -1)
         x = F.relu(self.fc1(x))
-        # print(x.shape) #torch.Size([32, 4608])
         x = self.fc2(x)
 
-        # print(x.shape)
         return x
 
     def training_step(self, batch, batch_idx):
@@ -107,13 +99,13 @@ class CNN_LFLB(pl.LightningModule):
         with torch.no_grad():
             y_hat = self.forward(x)
             y_pred = torch.max(F.softmax(y_hat, dim=1), 1)[1]
-            #print(y.cpu(), y_pred.cpu())
+
             acc = metrics.accuracy_score(y.cpu(), y_pred.cpu())
             f1 = metrics.f1_score(y.cpu(), y_pred.cpu(), average='macro')
             loss_val = F.cross_entropy(y_hat, y)
 
         output = OrderedDict({'val_loss': loss_val, 'val_f1': f1, 'val_acc': acc})
-        # print(output)
+     
         return output
 
     def validation_end(self, outputs):
@@ -193,86 +185,3 @@ class CNN_LFLB(pl.LightningModule):
         parser.add_argument(
             '--num_classes', dest='num_classes', default=8, type=int)
         return parser
-
-# #%%
-# vgg = models.vgg16_bn()
-# #%%
-# print(vgg)
-# print(vgg.features)
-# n_vgg = nn.Sequential(*[vgg.features,vgg.avgpool])
-# print(n_vgg)
-# #%%
-# # # %%
-# print(os.getcwd())
-# %%
-# print(os.listdir('../../../'))
-# dataset_ravdess = RavdessSpectDataset('../../../datasets/RAVDESS/SOUND_SPECT/',set_type='train')
-# print(dataset_ravdess[0])
-# %%
-
-# #%%
-# import torchvision.transforms as transforms
-# from torch.utils.data import DataLoader
-# transform = transforms.Compose([transforms.Resize(220),transforms.ToTensor()])
-# data =  DataLoader(RavdessSpectDataset('../../../datasets/RAVDESS/SOUND_SPECT/',set_type='train', transform=transform),
-#          batch_size=32, num_workers = 0, pin_memory=True,
-#          shuffle=True)
-
-# #%%
-# batch = next(iter(data))
-# #%%
-# out = vgg.features(batch[0])
-# #out = n_vgg(batch[0])
-# out.shape
-# #%%
-# out = out.squeeze()
-# out
-# #%%
-# out = out.resize(512,6,3,2)
-
-# #%%
-# dt = batch[0][0]
-# print(dt, dt.size())
-# print(dt.resize(2,3,220,110).size())
-# batch[0].size()
-# #%%
-# import matplotlib.pyplot as plt
-# plt.imshow(dt.permute(1, 2, 0)  )
-# #%%
-# #split image in halt and add to new dim for img seq
-# n_dt = torch.stack(torch.split(dt,110,dim=2))
-# plt.imshow(n_dt[0].permute(1, 2, 0)  )
-
-# %%
-# model = CNN_LSTM(0)
-# example_input_array = torch.rand(1,1,90000)
-# model.forward(example_input_array)
-#dataset = RavdessDataset('data/RAVDESS/SOUND_FILES/',set_type='test')
-
-
-# # %%
-# import numpy as np
-# data = dataset[0][0]
-# data = data[np.newaxis,...]
-# data = torch.tensor(data)
-# np.argmax(F.softmax(model(data)).detach().numpy())
-
-# # %%
-
-# data = dataset[0][0]
-# data = data[np.newaxis,...]
-# data = torch.tensor(data)
-# print(data.shape)
-
-# %%
-# loader = DataLoader(RavdessDataset('data/RAVDESS/SOUND_FILES/',set_type='train'), batch_size=32, num_workers=0)
-
-# # %%
-# data =next(iter(loader))
-
-# # %%
-# model.training_step(data,0)
-
-# %%
-
-# %%

@@ -36,7 +36,6 @@ logging.basicConfig(
 
 
 def report(model, wandb_logger):
-    # https://donatstudios.com/CsvToMarkdownTable
 
     model.eval()
     model = model.cpu()
