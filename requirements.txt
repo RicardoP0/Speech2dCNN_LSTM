@@ -9,7 +9,7 @@ numpy==1.21.0
 wandb==0.8.32
 pandas==1.0.3
 torch==1.4.0
-Pillow==9.0.0
+Pillow==9.0.1
 scikit_learn==0.22.2.post1
 skimage==0.0
 torch==1.4.0
